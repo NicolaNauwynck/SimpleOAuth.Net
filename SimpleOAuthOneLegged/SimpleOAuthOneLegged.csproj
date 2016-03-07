@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SimpleOAuth">
-      <HintPath>..\..\..\..\Users\Nicola\Downloads\SimpleOAuth.Net-master\SimpleOAuth.Net-master\SimpleOAuth\bin\Debug\SimpleOAuth.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleOAuth\SimpleOAuth.csproj">
+      <Project>{7195a9be-2949-4819-9beb-7b5f366b7cbc}</Project>
+      <Name>SimpleOAuth</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
