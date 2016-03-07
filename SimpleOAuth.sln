@@ -1,11 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleOAuth", "SimpleOAuth\SimpleOAuth.csproj", "{7195A9BE-2949-4819-9BEB-7B5F366B7CBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleOAuthTwitter", "SimpleOAuthTwitter\SimpleOAuthTwitter.csproj", "{797DB1AA-32A5-4EEE-B5BD-73667CEE112F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleOAuthTester", "SimpleOAuthTester\SimpleOAuthTester.csproj", "{70CD80CC-5FED-47CD-B8A5-AC7E00276EFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleOAuthOneLegged", "SimpleOAuthOneLegged\SimpleOAuthOneLegged.csproj", "{D8589832-727F-4309-9B0D-7B2E1542317C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,16 @@ Global
 		{70CD80CC-5FED-47CD-B8A5-AC7E00276EFA}.Release|Mixed Platforms.Build.0 = Release|x86
 		{70CD80CC-5FED-47CD-B8A5-AC7E00276EFA}.Release|x86.ActiveCfg = Release|x86
 		{70CD80CC-5FED-47CD-B8A5-AC7E00276EFA}.Release|x86.Build.0 = Release|x86
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D8589832-727F-4309-9B0D-7B2E1542317C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,6 +11,8 @@ using SimpleOAuth.Utilities;
 using SimpleOAuth.Internal;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using SimpleOAuth.Models;
 
 namespace SimpleOAuth
 {
@@ -72,12 +74,15 @@ namespace SimpleOAuth
         /// <summary>
         /// The OAuth version to use, by default it is 1.0.
         /// </summary>
-        public string OAuthVersion { 
-            get { 
-                return _oauthVersion; 
-            } 
-            set { 
-                _oauthVersion = value; 
+        public string OAuthVersion
+        {
+            get
+            {
+                return _oauthVersion;
+            }
+            set
+            {
+                _oauthVersion = value;
             }
         }
 
@@ -231,7 +236,8 @@ namespace SimpleOAuth
             AuthorizationHeader.Add("oauth_nonce", new NonceGenerator().Generate());
             AuthorizationHeader.Add("oauth_signature_method", SigningMethod.GetDescription());
             AuthorizationHeader.Add("oauth_timestamp", new TimestampGenerator().Generate());
-            if (!String.IsNullOrEmpty(RequestTokens.AccessToken)) {
+            if (!String.IsNullOrEmpty(RequestTokens.AccessToken))
+            {
                 AuthorizationHeader.Add("oauth_token", RequestTokens.AccessToken);
             }
             AuthorizationHeader.Add("oauth_version", OAuthVersion);
@@ -244,11 +250,8 @@ namespace SimpleOAuth
             var baseUrl = String.Format("{0}://{1}{2}", ContainedRequest.RequestUri.Scheme, ContainedRequest.RequestUri.Host, ContainedRequest.RequestUri.AbsolutePath);
 
             var parameters = new SortedDictionary<string, string>(AuthorizationHeader);
-            var queryParams = UrlHelper.ParseQueryString(ContainedRequest.RequestUri.Query);
-            foreach (var pair in queryParams)
-            {
-                parameters.Add(pair.Key, pair.Value);
-            }
+            var queryParams = UrlHelper.ParseQueryStringToList(ContainedRequest.RequestUri.Query);
+            List<KeyValue> result = new List<KeyValue>();
 
             if (method.Equals("POST") && !String.IsNullOrEmpty(ContainedRequest.ContentType) && ContainedRequest.ContentType.Equals(FormUrlEncodedMimeType))
             {
@@ -263,8 +266,30 @@ namespace SimpleOAuth
                 }
             }
 
-            var paramString = new StringBuilder();
             foreach (var pair in parameters)
+            {
+                var param = new KeyValue()
+                {
+                    Key = pair.Key,
+                    Value = pair.Value
+                };
+                result.Add(param);
+            }
+
+            foreach (var pair in queryParams)
+            {
+                var param = new KeyValue()
+                {
+                    Key = pair.Key,
+                    Value = pair.Value
+                };
+                result.Add(param);
+            }
+
+            result = result.OrderBy(o => o.Key).ToList();
+
+            var paramString = new StringBuilder();
+            foreach (var pair in result)
             {
                 if (paramString.Length > 0)
                 {
@@ -274,7 +299,7 @@ namespace SimpleOAuth
             }
 
             // percent encode everything
-            var encodedParams = String.Format("{0}&{1}&{2}", ContainedRequest.Method.ToUpper(), 
+            var encodedParams = String.Format("{0}&{1}&{2}", ContainedRequest.Method.ToUpper(),
                 UrlHelper.Encode(baseUrl), UrlHelper.Encode(paramString.ToString()));
 
             // key

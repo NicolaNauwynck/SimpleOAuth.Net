@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
+using System.Linq;
+using SimpleOAuth.Models;
 
 namespace SimpleOAuth.Utilities
 {
@@ -50,6 +52,30 @@ namespace SimpleOAuth.Utilities
             {
                 var segmentParts = segment.Split('=');
                 collection.Add(segmentParts[0].Trim(new char[] { '?', ' ' }), UrlHelper.Decode(segmentParts[1].Trim()));
+            }
+
+            return collection;
+        }
+
+        public static List<KeyValue> ParseQueryStringToList(string query)
+        {
+            var collection = new List<KeyValue>();
+            var queryParts = query.Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var segment in queryParts)
+            {
+                var segmentParts = segment.Split('=');
+                //special case for zipcode
+                if (segmentParts.Length == 3)
+                {
+                    segmentParts[1] += "=" + segmentParts[2];
+                    segmentParts = segmentParts.Take(segmentParts.Count() - 1).ToArray();
+                }
+                var param = new KeyValue()
+                {
+                    Key = segmentParts[0].Trim(new char[] { '?', ' ' }),
+                    Value = UrlHelper.Decode(segmentParts[1].Trim())
+                };
+                collection.Add(param);
             }
 
             return collection;
